@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      font-size: 20px;
+    }
+    #kekka{
+      font-size: 40px;
+      color: red;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  
+  <label for="syoko">初項</label><input id="syoko" type="number" class="text">で
+  <form action="" name="aaa">
+    <select name="erabu" id="erabu">
+        <option value="kosa">公比</option>
+        <option value="kohi" disabled>公差</option>
+    </select>
+  </form>
+  <input type="number" name="" id="konaninani">で
+  第<input type="number" name="" id="kousuu" value="99">項までの
+  数列を求める
+  <button id="btn">実行</button>
+  <div id="kekka"><div>
+    
+  <script>
+    const syoko = document.getElementById("syoko");
+    const btn = document.getElementById("btn");
+    const atai = document.getElementById("konaninani");
+    let kosu = document.getElementById("kousuu");
+    const kekka = document.getElementById("kekka");
+    let suretsu = [];
+    btn.addEventListener("click", () => {
+      keisan_kohi();
+      console.log(String(suretsu));
+      kekka.textContent = suretsu;
+    });
+    function keisan_kohi() {
+      suretsu.push(Number(syoko.value));
+      let atai_value = Number(atai.value);
+      u = 0;
+      i = 1;
+      while( u < kosu.value ) {
+        let owari = syoko.value * atai_value ** i;
+        suretsu.push(String(owari));
+        u++
+        i++
+      }
+    }
+
+
+  </script>
+</body>
+</html>
