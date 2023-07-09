@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>数列ジェネレーター</title>
   <style>
     body{
       font-size: 20px;
+      background-color: rgb(230, 243, 255);
     }
     #kekka{
       font-size: 40px;
       color: red;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    form{
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      border: solid rgb(202, 202, 202) 2px;
+      box-shadow: rgb(231, 231, 231) 0px 0px 10px 3px;
     }
   </style>
 </head>
@@ -20,8 +28,9 @@
   <label for="syoko">初項</label><input id="syoko" type="number" class="text">で
   <form action="" name="aaa">
     <select name="erabu" id="erabu">
-        <option value="kosa">公比</option>
-        <option value="kohi" disabled>公差</option>
+      <option hidden>選択してください</option>
+        <option value="kosa">公差</option>
+        <option value="kohi">公比</option>
     </select>
   </form>
   <input type="number" name="" id="konaninani">で
@@ -38,20 +47,48 @@
     const kekka = document.getElementById("kekka");
     let suretsu = [];
     btn.addEventListener("click", () => {
-      keisan_kohi();
-      console.log(String(suretsu));
-      kekka.textContent = suretsu;
+      let num = document.aaa.erabu.selectedIndex;
+      let str = document.aaa.erabu.options[num].value;
+      num = -1
+      suretsu = [];
+      if (str == "kohi") {
+        keisan_kohi();
+        kekka.textContent = suretsu;
+        
+      } else if (str == "kosa") {
+        keisan_kosa();
+        kekka.textContent = suretsu;
+      } else {
+        alert("「交差，公比」を選択してください");
+      }
+      
+      
     });
     function keisan_kohi() {
       suretsu.push(Number(syoko.value));
       let atai_value = Number(atai.value);
-      u = 0;
+      u = 1;
       i = 1;
+      let change_kosu = kosu.value - 1;
       while( u < kosu.value ) {
         let owari = syoko.value * atai_value ** i;
         suretsu.push(String(owari));
         u++
         i++
+      }
+    }
+    function keisan_kosa() {
+      suretsu.push(Number(syoko.value));
+      let atai_value = Number(atai.value);
+      let change_kosu = kosu.value - 1;
+      u = 1;
+      i = 1;
+      while (i < kosu.value) {
+        let owari = Number(syoko.value) + ( atai_value * u );
+        console.log(owari);
+        suretsu.push(owari)
+        i++
+        u++
       }
     }
 
